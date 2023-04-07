@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: build
+    container_name: breathe
+    environment:
+      #- "GIT_USER=<your-git-server-user>"
+      #- "GIT_SERVER=<your-git-server-address>"
+      #- "GIT_PORT=<your-git-server-port>"
+      - "GIT_REPOSITORY=<your-repository>"
+      - "GIT_USERNAME=<your-username>"
+      - "GIT_EMAIL=<your-email>"
+      #- "GIT_PULL_INTERVAL=<your-pull-interval>"
+    image: taskbjorn/breathe:latest
+    # (Optional) Mount SSH keys.
+    # If your repository is private and requires access via SSH keys, mount the
+    # SSH key to the `.ssh` folder inside the container. Do NOT mount the entire
+    # `.ssh` folder!
+    volumes:
+      - .ssh/id_rsa:/root/.ssh/id_rsa
+    ports:
+      - "80:80"
